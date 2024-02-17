@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
+import { WeatherPresenter } from "../presenters/weather.presenter";
 import { weatherService } from "../services/weather.service";
 import { IQuery } from "../types/query.types";
 
@@ -8,7 +9,7 @@ class WeatherController {
     try {
       const weather = await weatherService.getByLocation(req.query as IQuery);
       // console.log(weather);
-      return res.json({ data: weather });
+      return res.json({ data: WeatherPresenter.weatherToResponse(weather) });
     } catch (e) {
       next(e);
     }
