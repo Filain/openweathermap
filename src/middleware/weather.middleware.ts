@@ -15,6 +15,9 @@ class WeatherMiddleware {
       if (query.city && (query.lon || query.lat)) {
         throw new ApiError("Bad Requestе", 400);
       }
+      if ((query.lon && !query.lat) || (!query.lon && query.lat)) {
+        throw new ApiError("Bad Requestе", 400);
+      }
       res.locals = query;
       next();
     } catch (e) {
