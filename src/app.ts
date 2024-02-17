@@ -1,8 +1,10 @@
 import express, { NextFunction, Request, Response } from "express";
+import * as swaggeUi from "swagger-ui-express";
 
 import { configs } from "./configs/configs";
 import { ApiError } from "./errors/api.errors";
 import { weatherRouter } from "./routers/weather.router";
+import * as swaggerDocument from "./units/swagger.json";
 
 const app = express();
 
@@ -12,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 const PORT = configs.PORT;
 
 app.use("/", weatherRouter);
+app.use("/swagger", swaggeUi.serve, swaggeUi.setup(swaggerDocument));
 
 app.use("*", (err: ApiError, req: Request, res: Response, next: NextFunction) => {
   return res.status(err?.status || 500).json({

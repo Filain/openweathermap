@@ -1,0 +1,111 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.5",
+    "title": "WeatherAPI by Volodymyr Fylypiv"
+  },
+  "paths": {
+    "/weather": {
+      "get": {
+        "tags": [
+          "Weather by City"
+        ],
+        "summary": "GET WEATHER",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "description": "city name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "lat",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "lon",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "received all users",
+            "schema": {
+              "$ref": "#/definitions/weatherData"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "weatherData": {
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "weather": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "temp": {
+                  "type": "integer"
+                },
+                "feels_like": {
+                  "type": "integer"
+                },
+                "visibility": {
+                  "type": "integer"
+                },
+                "wind": {
+                  "type": "object",
+                  "properties": {
+                    "speed": {
+                      "type": "integer"
+                    },
+                    "deg": {
+                      "type": "integer"
+                    },
+                    "gust": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "error": {
+      "properties": {
+        "massage": {
+          "type": "string"
+        },
+        "status": {
+          "type": "number"
+        }
+      }
+    }
+}}

@@ -10,12 +10,13 @@ class WeatherService {
     const { city, lat, lon } = query;
     let urlBase: string;
     if (city) {
-      urlBase = path.join(configs.API_URL, "data", "2.5", `weather?q=${city}&APPID=${configs.API_KEY}`);
+      urlBase = path.join(configs.API_URL, "data", "2.5", `weather?q=${city}&units=metric&APPID=${configs.API_KEY}`);
     } else {
-      urlBase = path.join(configs.API_URL, "data", "2.5", `weather?lat=${lat}&lon=${lon}&appid=${configs.API_KEY}`);
+      urlBase = path.join(configs.API_URL, "data", "2.5", `weather?lat=${lat}&lon=${lon}&units=metric&appid=${configs.API_KEY}`);
     }
-    // https://api.openweathermap.org/data/2.5/weather?lat=49.8383&lon=24.0232&appid=8d93748b686624b5cda2f29e72dd6138
-    // https://api.openweathermap.org/data/2.5/weather?q=Lviv&APPID=8d93748b686624b5cda2f29e72dd6138
+
+    // https://api.openweathermap.org/data/2.5/weather?lat=49.8383&lon=24.0232&units=metric&appid=8d93748b686624b5cda2f29e72dd6138
+    // https://api.openweathermap.org/data/2.5/weather?q=Lviv&units=metric&APPID=8d93748b686624b5cda2f29e72dd6138
     return new Promise((resolve, reject) => {
       https.get(urlBase, (res) => {
         res

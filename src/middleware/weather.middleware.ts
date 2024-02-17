@@ -13,7 +13,7 @@ class WeatherMiddleware {
         throw new ApiError("Bad Requestе", 400);
       }
       if (query.city && (query.lon || query.lat)) {
-        throw new ApiError("Bad RequestеS", 400);
+        throw new ApiError("Bad Requestе", 400);
       }
       res.locals = query;
       next();
