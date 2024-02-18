@@ -8,7 +8,6 @@ class WeatherController {
   public async getByLocation(req: Request, res: Response, next: NextFunction) {
     try {
       const weather = await weatherService.getByLocation(req.query as IQuery);
-      // console.log(weather);
       return res.json({ data: WeatherPresenter.weatherToResponse(weather) });
     } catch (e) {
       next(e);
